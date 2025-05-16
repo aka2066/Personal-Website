@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroSection from "../components/HeroSection";
 
 export default function Home() {
   return (
@@ -18,22 +19,8 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center text-center">
-        <div className="z-10 px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Ryan Rahrooh</h1>
-          <h2 className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-2">Software Engineer</h2>
-          <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">Orlando, FL | ryan.rahrooh@outlook.com | 407-885-8302</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="#about" className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
-              About Me
-            </Link>
-            <Link href="#projects" className="px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-md hover:bg-blue-50 dark:hover:bg-gray-800 transition">
-              View Projects
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Animated Hero Section with Polaroid Images */}
+      <HeroSection />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
