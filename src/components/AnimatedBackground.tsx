@@ -1,62 +1,125 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const AnimatedBackground: React.FC = () => {
+const AnimatedBackground = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
-    <div className="absolute inset-0 overflow-hidden -z-10">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-800 via-purple-800 to-violet-900">
-        {/* Animated gradient overlays */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-600/30"
-          animate={{
-            opacity: [0.5, 0.7, 0.5],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-        />
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-bl from-indigo-500/20 to-blue-700/30"
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            delay: 2
-          }}
-        />
+    <div className="absolute inset-0 overflow-hidden bg-gray-900">
+      {/* Primary animated gradient background */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%'],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          repeatType: 'reverse',
+          ease: 'linear',
+        }}
+        style={{
+          backgroundSize: '200% 200%',
+        }}
+      />
+      
+      {/* Animated overlay with more vibrant colors */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-purple-500/10 to-indigo-800/20"
+        animate={{
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 8, 
+          ease: "easeInOut" 
+        }}
+      />
+
+      {/* Glowing orbs */}
+      {Array(30).fill(0).map((_, index) => {
+        const size = Math.random() * 8 + 3;
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const animationDuration = Math.random() * 10 + 8;
+        const delay = Math.random() * 5;
+        const blur = Math.random() * 10 + 5;
         
-        {/* Light dots/stars */}
-        <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => {
-            const size = Math.random() * 3 + 1;
-            const opacity = Math.random() * 0.5 + 0.3;
-            const left = `${Math.random() * 100}%`;
-            const top = `${Math.random() * 100}%`;
-            const animationDelay = `${Math.random() * 10}s`;
-            
-            return (
-              <div
-                key={i}
-                className="absolute rounded-full bg-white animate-pulse"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left,
-                  top,
-                  opacity,
-                  animationDelay,
-                  animationDuration: '3s',
-                }}
-              />
-            );
-          })}
-        </div>
-      </div>
+        return (
+          <motion.div 
+            key={index}
+            className="absolute rounded-full bg-blue-400"
+            style={{
+              width: size,
+              height: size,
+              left: `${left}%`,
+              top: `${top}%`,
+              filter: `blur(${blur}px)`,
+              opacity: 0.6,
+            }}
+            animate={{
+              opacity: [0.2, 0.6, 0.2],
+              scale: [1, 1.5, 1],
+              x: [0, Math.random() * 50 - 25, 0],
+              y: [0, Math.random() * 50 - 25, 0],
+            }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: animationDuration, 
+              ease: "easeInOut",
+              delay: delay,
+            }}
+          />
+        );
+      })}
+      
+      {/* Subtle mesh grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-20" 
+        style={{ 
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)', 
+          backgroundSize: '50px 50px' 
+        }}
+      />
+      
+      {/* Moving stars */}
+      {Array(15).fill(0).map((_, index) => {
+        const size = Math.random() * 3 + 1;
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const animationDuration = Math.random() * 20 + 15;
+        
+        return (
+          <motion.div 
+            key={`star-${index}`}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: size,
+              height: size,
+              left: `${left}%`,
+              top: `${top}%`,
+            }}
+            animate={{
+              opacity: [0.5, 1, 0.5],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: animationDuration, 
+              ease: "easeInOut",
+              delay: Math.random() * 5,
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

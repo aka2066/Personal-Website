@@ -1,23 +1,22 @@
 import Image from "next/image";
-import Link from "next/link";
-import HeroSection from "../components/HeroSection";
+import Link from 'next/link';
+import HeroSection from '../components/HeroSection';
+import Navigation from '../components/Navigation';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      {/* Navigation */}
-      <nav className="fixed w-full bg-white bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 z-50 shadow-sm py-4">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="text-xl font-bold">Ryan Rahrooh</div>
-          <div className="hidden md:flex space-x-6">
-            <Link href="#about" className="hover:text-blue-600 transition">About</Link>
-            <Link href="#experience" className="hover:text-blue-600 transition">Experience</Link>
-            <Link href="#skills" className="hover:text-blue-600 transition">Skills</Link>
-            <Link href="#projects" className="hover:text-blue-600 transition">Projects</Link>
-            <Link href="#contact" className="hover:text-blue-600 transition">Contact</Link>
-          </div>
-        </div>
-      </nav>
+      {/* Home icon in top left */}
+      <div className="fixed top-4 left-4 z-50">
+        <Link href="#" className="text-xl font-bold hover:text-blue-600 transition flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z" />
+          </svg>
+        </Link>
+      </div>
+
+      {/* Navigation Menu */}
+      <Navigation />
 
       {/* Animated Hero Section with Polaroid Images */}
       <HeroSection />
